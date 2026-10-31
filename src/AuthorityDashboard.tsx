@@ -5,6 +5,7 @@ import { AREAS, CATEGORY_NAMES } from "./store";
 import { api, type ApiUser, type ChipId, type Hotspot, type Session } from "./api";
 import Brief, { DueText, Evidence, ResponseChip, StatusPill } from "./IncidentDetail";
 import MapDashboard from "./MapDashboard";
+import AreaTabs from "./AreaTabs";
 import WardCard from "./WardCard";
 import RecoHeader from "./RecoHeader";
 import { CategoryPhoto } from "./brand";
@@ -91,9 +92,9 @@ export default function AuthorityDashboard({ user, lang = "en", onSwitch }: { us
   const clearFilters = () => { setCat(""); setArea(""); setSearch(""); setResponse(""); setView("all"); };
 
   return <main className="page section ad">
-    <div className="page-heading"><div><span className="eyebrow">{tr(lang, "ad_eyebrow")}</span><h1>{user.area ? tr(lang, "ad_titleArea").replace("{area}", user.area) : tr(lang, "ad_title")}</h1><p>{tr(lang, "ad_welcome")}, {user.name} · {deptLabel(lang, user.department)} · {user.employee_id}</p></div></div>
+    <div className="page-heading"><div><span className="eyebrow">{tr(lang, "ad_eyebrow")}</span><h1>{user.area ? trf(lang, "ad_titleArea", { area: user.area }) : tr(lang, "ad_title")}</h1><p>{tr(lang, "ad_welcome")}, {user.name} · {deptLabel(lang, user.department)} · {user.employee_id}</p></div></div>
 
-    {user.area && <WardCard area={user.area} />}
+    {onSwitch ? <AreaTabs ownArea={user.area ?? null} lang={lang} onSwitch={onSwitch} /> : user.area && <WardCard area={user.area} />}
 
     <div className="ad-tabs" role="tablist" aria-label={tr(lang, "ad_title")}>
       <button role="tab" id="tab-complaints" aria-selected={tab === "complaints"} aria-controls="panel-complaints" className={tab === "complaints" ? "active" : ""} onClick={() => setTab("complaints")}>{tr(lang, "an_tabComplaints")}</button>
