@@ -181,7 +181,8 @@ Full details: [docs/FEATURES.md](docs/FEATURES.md).
 ## Run the tests
 
 ```bash
-docker compose --profile test run --rm tests     # 156 backend tests + 2 ML tests
+docker compose --profile test run --rm tests     # 156 backend tests
+python -m pytest ml/tests                        # 2 ML parity tests (needs numpy and scikit-learn)
 npx tsc --noEmit                                 # frontend type check
 npx pnpm@10 build                                # production build
 ```
