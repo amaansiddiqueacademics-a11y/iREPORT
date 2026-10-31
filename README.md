@@ -248,3 +248,15 @@ iREPORT/
 - Before any public launch, data handling should be reviewed under India's DPDP Act, 2023.
 
 More in [docs/OPEN_ITEMS.md](docs/OPEN_ITEMS.md).
+
+---
+
+## Licence
+
+The code is released under the [MIT Licence](LICENSE), © 2026 Mohammed Amaan Siddique and Abdul Hakim Shaikh.
+
+Bundled data and pictures keep their own licences:
+
+- Ward boundaries (`backend/app/data/bmc_wards.geojson`): DataMeet, CC BY-SA 2.5 IN.
+- Map tiles and any loaded OpenStreetMap data: © OpenStreetMap contributors, ODbL.
+- Area pictures, category pictures and hazard symbols: see [docs/IMAGE_CREDITS.md](docs/IMAGE_CREDITS.md).
