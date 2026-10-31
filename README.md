@@ -257,7 +257,7 @@ iREPORT was built by:
 
 - **Abdul Hakim Shaikh** ([@HakimK438](https://github.com/HakimK438))
 - **Mohammed Amaan Siddique** ([@amaansiddiqueacademics-a11y](https://github.com/amaansiddiqueacademics-a11y))
-- **Sairaj**
+- **Sairaj** ([@srkhandagale1601-del](https://github.com/srkhandagale1601-del))
 
 The project started in [HakimK438/iREPORT](https://github.com/HakimK438/iREPORT); this repository continues it.
 
