@@ -16,7 +16,17 @@ let refreshing: Promise<Session | null> | null = null;
 let onSessionLost: (() => void) | null = null;
 
 export function setSessionLostHandler(fn: () => void) { onSessionLost = fn; }
-export function setToken(token: string | null) { accessToken = token; }
+export function setToken(token: string | null) { accessToken = token; markSignedIn(token !== null); }
+
+/* "Signed in on this browser" marker. The refresh cookie is httpOnly, so the page cannot see whether one exists; without this
+   marker every visitor's first request was a refresh that a guest always fails with a 401 (an error in the console on every
+   page load). The marker holds no secret: it only decides whether restoring the session is worth asking for. */
+const SIGNED_IN = "ireport.signedIn";
+function markSignedIn(on: boolean) { try { if (on) window.localStorage.setItem(SIGNED_IN, "1"); else window.localStorage.removeItem(SIGNED_IN); } catch { /* storage unavailable */ } }
+function wasSignedIn(): boolean { try { return window.localStorage.getItem(SIGNED_IN) === "1"; } catch { return true; } }
+
+/** On page load: restore the session from the refresh cookie, but only if this browser was signed in. */
+export function restoreSession(): Promise<Session | null> { return wasSignedIn() ? refreshSession() : Promise.resolve(null); }
 
 type Options = { method?: string; body?: unknown; form?: FormData; signal?: AbortSignal; retry?: boolean };
 
@@ -54,8 +64,8 @@ export function refreshSession(): Promise<Session | null> {
   refreshing ??= attempt()
     // Another tab refreshed with the same cookie a moment ago; the new cookie is already in the jar.
     .catch(e => (e instanceof ApiError && e.code === "refresh_race" ? new Promise<void>(r => window.setTimeout(r, 300)).then(attempt) : Promise.reject(e)))
-    .then(s => { accessToken = s.access_token; return s; })
-    .catch(() => { accessToken = null; return null; })
+    .then(s => { setToken(s.access_token); return s; })
+    .catch(() => { setToken(null); return null; })
     .finally(() => { refreshing = null; });
   return refreshing;
 }

@@ -3,7 +3,7 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient, type InfiniteD
 import { Icon, type IconName } from "./Icon";
 import { AREAS, AREA_CENTRES, LIFECYCLE, type Status } from "./store";
 import { compressPhoto } from "./compress";
-import { api, refreshSession, setSessionLostHandler, setToken, type ApiUser, type IncidentPublic, type MyReport, type Page as ApiPage, type Session } from "./api";
+import { api, restoreSession, setSessionLostHandler, setToken, type ApiUser, type IncidentPublic, type MyReport, type Page as ApiPage, type Session } from "./api";
 import { Brand, distanceLabel, homeCards } from "./brand";
 import { menuText, severityName, statusName, tr, trf, type StrKey } from "./i18n";
 import { FAQS, HOW_STEPS, HOW_TIPS, HOW_UI } from "./i18nStaff";
@@ -378,7 +378,7 @@ export default function App() {
   const endSession = useCallback(() => { setToken(null); setUser(null); setFlow("none"); qc.clear(); }, [qc]);
   useEffect(() => {
     setSessionLostHandler(() => { endSession(); setPage("auth"); });
-    refreshSession().then(s => { if (s) setUser(s.user); }).finally(() => setBooting(false)); // restore the session from the refresh cookie
+    restoreSession().then(s => { if (s) setUser(s.user); }).finally(() => setBooting(false)); // restore the session from the refresh cookie
   }, [endSession]);
 
   const setLang = (l: Lang) => { setLangState(l); saveLang(l); if (user) api.patchMe({ lang: l }).then(setUser).catch(() => {}); };
