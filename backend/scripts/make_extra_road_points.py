@@ -7,7 +7,6 @@ road_points.json (so nothing merges with the older demo complaints). Writes back
 import json
 import random
 import time
-from pathlib import Path
 
 from app.refdata import AREA_CENTRES, nearest_area
 from scripts.make_road_points import metres, roads_near

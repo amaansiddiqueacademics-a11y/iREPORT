@@ -21,7 +21,6 @@ from app.config import get_settings
 from app.db import SessionLocal, engine
 from app.incidents import create_report, recompute_priority
 from app.models import Media, User
-from app.refdata import ref
 from app.schemas import ReportIn
 from app.security import hash_password
 from app.storage import get_storage, new_keys

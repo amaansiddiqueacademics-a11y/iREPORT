@@ -18,7 +18,6 @@ from app.ai.image_model import ImageClassifier
 from app.db import SessionLocal, engine
 from app.incidents import create_report
 from app.models import Media, User
-from app.refdata import ref
 from app.schemas import AiIn, ReportIn
 from app.security import hash_password
 from app.storage import get_storage, new_keys

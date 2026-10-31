@@ -209,7 +209,6 @@ async def test_no_answer_for_72_hours_closes_it_automatically(client):
 
 
 async def test_every_query_uses_the_same_definition_of_open(client):
-    from app.db import engine
 
     officer = await make_authority(client)
     a, closed, _ = await new_complaint(client)

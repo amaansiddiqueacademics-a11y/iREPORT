@@ -20,7 +20,6 @@ from pathlib import Path
 
 import torch
 import torch.nn.functional as F
-from torch import nn
 from torch.utils.data import DataLoader, WeightedRandomSampler
 from torchvision import datasets, transforms
 
