@@ -251,6 +251,18 @@ More in [docs/OPEN_ITEMS.md](docs/OPEN_ITEMS.md).
 
 ---
 
+## Team
+
+iREPORT was built by:
+
+- **Abdul Hakim Shaikh** ([@HakimK438](https://github.com/HakimK438))
+- **Mohammed Amaan Siddique** ([@amaansiddiqueacademics-a11y](https://github.com/amaansiddiqueacademics-a11y))
+- **Sairaj**
+
+The project started in [HakimK438/iREPORT](https://github.com/HakimK438/iREPORT); this repository continues it.
+
+---
+
 ## Licence
 
 The code is released under the [MIT Licence](LICENSE), © 2026 Mohammed Amaan Siddique and Abdul Hakim Shaikh.
