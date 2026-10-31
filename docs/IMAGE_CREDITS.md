@@ -43,14 +43,22 @@ The pictures in this folder that are not the project's own files come from Wikim
 | Vasai | vasai.png | en:User:Oknitop. Transferred to Commons by User:Carlos Luis  | CC BY-SA 3.0 | [Vasaifort.jpg](https://commons.wikimedia.org/wiki/File:Vasaifort.jpg) |
 
 
+### Area pictures without a credit
+
+`andheri-east.png`, `andheri-west.png`, `bandra.png`, `borivali.png`, `goregaon.png`, `malad.png`, `sion.png`, `ulhasnagar.png` and
+`vile-parle.png` were supplied by the project owner and have no recorded source or licence. Confirm each one, or replace it with a
+Wikimedia Commons picture and add a row above, before public release.
+
 ### Category pictures
 
-No images are bundled. Place real photos here as pothole.jpg, garbage.jpg, streetlight.jpg, water-leakage.webp, electrical.jpg, other.avif.
-When a file is missing the home page shows the emoji card instead.
-If you add stock images, list the source and licence for each one below (Wikimedia Commons / Unsplash only).
+Used on the home page cards and in the report flow's category picker (`public/categories/`). When a file is missing the card shows an icon instead.
 
 | File | Source | Licence |
 |---|---|---|
-| pothole.jpg, garbage.jpg, streetlight.jpg, water-leakage.webp, electrical.jpg, other.avif | supplied by the project owner (from category_images/) | source and licence not recorded; confirm before public release |
+| water-leakage.webp | original illustration drawn for this project (31 Oct 2026); it replaced a stock image that carried a Shutterstock watermark | project's own |
+| pothole.jpg, garbage.jpg, streetlight.jpg, electrical.jpg, other.avif | supplied by the project owner | source and licence not recorded; confirm or replace before public release |
 
-Note: these images are used on the landing page cards and in the report flow category picker. `water-leakage.webp` contains a stock-photo watermark ("shutterstock") along its bottom edge, which the landing cards crop away with CSS: replace it with a licensed or own image before public release.
+### Hazard-level symbols
+
+`public/symbols/critical.png`, `high_risk.png`, `moderate_risk.png` and `daily_routine.png` are original drawings made for this
+project (31 Oct 2026). They replaced stock images, two of which carried Dreamstime and Shutterstock watermarks.
