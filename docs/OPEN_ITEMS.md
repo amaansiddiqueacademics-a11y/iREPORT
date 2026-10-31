@@ -2,7 +2,7 @@
 
 Open items after the authority v2 work. Each line says what is missing and why.
 
-- **Map checks from OpenStreetMap:** `python -m scripts.load_osm` is written but the Overpass download failed during the last build. Run it again; until then "near a school" and "on a main road" use the citizen's flags, labelled "citizen says".
+- **Map checks from OpenStreetMap:** the Overpass download has never completed (it failed again on 31 Oct 2026 from a sandboxed network: every server reset or timed out). Run it from a normal connection with `docker compose exec api python -m scripts.load_osm`, then copy the result out with `docker compose cp api:/srv/data/osm_features.geojson backend/data/` and commit it, so everyone else can load it with `--from-fixture` instead of downloading. Until then "near a school" and "on a main road" use the citizen's flags, labelled "citizen says".
 - **Ward boundaries outside BMC:** migration 0017 loads the official BMC ward polygons (33 of the 42 areas). The areas outside BMC limits (Thane, Kalyan, Navi Mumbai and the rest) still fall back to the nearest area centre; load their polygons with `scripts/load_wards.py`.
 - **Location pictures and symbols:** the files in `public/areas` and `public/symbols` have no licence record, and `critical.png` carries a stock-site watermark. Confirm the licences or replace them.
 - **Area picture script:** an automated fetch of freely licensed area pictures with credits was not built.

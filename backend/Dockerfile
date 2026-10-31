@@ -9,6 +9,7 @@ COPY alembic ./alembic
 COPY app ./app
 COPY models ./models
 COPY scripts ./scripts
+COPY data ./data
 
 FROM base AS test
 COPY requirements-dev.txt .
@@ -18,7 +19,7 @@ COPY pytest.ini .
 CMD ["pytest", "-q"]
 
 FROM base AS runtime
-RUN useradd --system --uid 10001 app
+RUN useradd --system --uid 10001 app && chown -R app /srv/data   # scripts.load_osm saves its fixture here
 USER app
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=3s CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health').status==200 else 1)"

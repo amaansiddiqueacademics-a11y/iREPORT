@@ -145,10 +145,14 @@ def main() -> int:
         got, failed = download()
         features = [f for fs in got.values() for f in fs]
         if features:
-            FIXTURE.parent.mkdir(parents=True, exist_ok=True)
-            FIXTURE.write_text(json.dumps({"type": "FeatureCollection", "attribution": "(c) OpenStreetMap contributors, ODbL", "bbox": list(BBOX),
-                                           "features": features}, separators=(",", ":")), encoding="utf-8")
-            print(f"saved {len(features)} features to {FIXTURE} ({FIXTURE.stat().st_size // 1024} KB)")
+            # Saving the fixture is a convenience; a read-only folder must not throw away a slow download before it is loaded.
+            try:
+                FIXTURE.parent.mkdir(parents=True, exist_ok=True)
+                FIXTURE.write_text(json.dumps({"type": "FeatureCollection", "attribution": "(c) OpenStreetMap contributors, ODbL", "bbox": list(BBOX),
+                                               "features": features}, separators=(",", ":")), encoding="utf-8")
+                print(f"saved {len(features)} features to {FIXTURE} ({FIXTURE.stat().st_size // 1024} KB)")
+            except OSError as e:
+                print(f"could not save the fixture to {FIXTURE} ({e}); loading into the database anyway")
     if failed:
         print("\nDOWNLOAD FAILED for: " + ", ".join(failed) + ". Nothing was invented for these.")
         for k, why in failed.items():
