@@ -75,7 +75,7 @@ These are the changes the design aims for, and the figures the app itself comput
 - Real ward boundaries are not loaded; areas are assigned from the nearest of the seeded area centres.
 - Performance was measured on an earlier build and should be re-measured on the real server.
 
-Details of each gap and its reason: [README.md](FEATURES.md#known-gaps) and [REVIEW_AUTHORITY_V2.md](REVIEW_AUTHORITY_V2.md).
+Details of each gap and its reason: [FEATURES.md](FEATURES.md#known-gaps) and [OPEN_ITEMS.md](OPEN_ITEMS.md).
 
 ---
 

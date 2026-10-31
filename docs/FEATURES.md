@@ -138,7 +138,7 @@ src/                  React app: App.tsx (citizen pages), AuthorityDashboard.tsx
                       AnalysisTab.tsx, AdminPanel.tsx, AdminPerformance.tsx (admin dashboard), StaffGuide.tsx (How it works),
                       MapDashboard.tsx, ProblemMap.tsx, ReportFlow.tsx, i18n.ts / i18nStaff.ts
 public/areas/         location pictures per area      public/symbols/   hazard category symbols
-public/guide/         screenshots and example photos used by the How it works page
+public/guide/         screenshots used by the How it works page
 backend/app/          FastAPI app
   routers/            auth, me, reports, incidents, authority, analytics, admin, ai, health
   incidents.py        report creation, merge and duplicate rules, risk inputs, map data
@@ -146,18 +146,17 @@ backend/app/          FastAPI app
   priority.py         risk formula, response categories, reasons    risk_config.py   every tunable number
   status.py           the one definition of "open"                  brief.py         the complaint brief
   ai/                 text model, image model, rules (flags, severity, NLP)
-backend/alembic/      migrations 0001 to 0016
+backend/alembic/      migrations 0001 to 0020
 backend/scripts/      seed_demo, seed_load, seed_area_problems, seed_extra_problems, backfill_image_check, load_osm, load_wards, bench, table_sizes
 ml/                   prepare_data_v2.py builds the 20-per-class training set; train_probe.py trains and exports the model
 backend/seed_data/     110 dataset photos (Pothole, Road Damage, Garbage, Electrical Hazard, Drainage, Other) used by the seed scripts
-backend/tests/        pytest suite (133 tests)
+backend/tests/        pytest suite (156 tests)
 ml/                   offline training and evaluation of the two models
-docs/                 AI_AND_GIS.md, I18N_REVIEW.md, screenshots/
+docs/                 feature, workflow, AI/GIS, training, decisions and setup notes (listed in README.md)
 DECISIONS.md          every choice the brief left open, numbered
-REVIEW_AUTHORITY_V2.md  review notes and manual test script for the authority v2 work
 ```
 
-Migrations, in order: 0001 schema, 0002 seed (departments, categories, areas), 0003 list indexes, 0004 report evidence, 0005 report answers, 0006 more areas, 0007 Mumbai region areas, 0008 area fix, 0009 duplicate reports, 0010 status values, 0011 workflow, 0012 map features, 0013 risk priority, 0014 photo checks and the needs-review flag, 0015 owner backfill (every worked complaint has an owner), 0016 `reports.reported_with` (problems reported together).
+Migrations, in order: 0001 schema, 0002 seed (departments, categories, areas), 0003 list indexes, 0004 report evidence, 0005 report answers, 0006 more areas, 0007 Mumbai region areas, 0008 area fix, 0009 duplicate reports, 0010 status values, 0011 workflow, 0012 map features, 0013 risk priority, 0014 photo checks and the needs-review flag, 0015 owner backfill (every worked complaint has an owner), 0016 `reports.reported_with` (problems reported together), 0017 official BMC ward polygons, 0018 accountability (proof of work, abuse checks), 0019 admin-editable response times, 0020 response-time fallback (a missing setting can no longer leave a complaint without a due date).
 
 ---
 
@@ -199,7 +198,7 @@ More detail: [HOW_TO_RUN.md](WINDOWS_SETUP.md) (Windows).
 docker compose --profile test run --rm tests        # in the Python 3.12 image (uses the ireport_test database)
 ```
 
-**133 backend tests** pass, plus 2 ML tests. They cover:
+**156 backend tests** pass, plus 2 ML tests. They cover:
 
 - authentication, refresh-token rotation and reuse detection, rate limits, role checks, authority approval
 - one report per spot (409 at 49 m versus 51 m, any category), the merge rule, the hourly report limit, add-photo, the nearby check, and the migration that flags old repeat reports
@@ -214,7 +213,7 @@ docker compose --profile test run --rm tests        # in the Python 3.12 image (
 - several problems at one place: extras are filed with the main complaint, a batch link must be the citizen's own recent report at that spot
 - the image pipeline, the AI endpoints, retention jobs
 
-Frontend: `npx tsc --noEmit` (one old error remains in `src/imports/vite.config.ts`, a missing `.figma` file) and `npx vite build`.
+Frontend: `npx tsc --noEmit` (clean) and `npx vite build`.
 
 ---
 

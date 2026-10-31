@@ -38,8 +38,8 @@ Everything else (Python, PostgreSQL, PostGIS, MinIO) runs inside Docker.
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/HakimK438/iREPORT.git
-cd iREPORT
+git clone https://github.com/amaansiddiqueacademics-a11y/I-Report.git
+cd I-Report
 ```
 
 Create your `.env` file from the example:
@@ -181,7 +181,7 @@ Full details: [docs/FEATURES.md](docs/FEATURES.md).
 ## Run the tests
 
 ```bash
-docker compose --profile test run --rm tests     # 133 backend tests + 2 ML tests
+docker compose --profile test run --rm tests     # 156 backend tests + 2 ML tests
 npx tsc --noEmit                                 # frontend type check
 npx pnpm@10 build                                # production build
 ```
