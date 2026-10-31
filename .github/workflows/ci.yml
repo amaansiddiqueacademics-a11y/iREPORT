@@ -1,0 +1,64 @@
+# Runs on every push and pull request: the backend test suite against PostgreSQL + PostGIS, the ML parity tests,
+# and the frontend type check, translation check, production build and dependency audit.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: ireport
+          POSTGRES_PASSWORD: ireport
+          POSTGRES_DB: ireport_test
+        ports: ["5434:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ireport -d ireport_test"
+          --health-interval 3s --health-retries 20
+    env:
+      DATABASE_URL: postgresql+asyncpg://ireport:ireport@localhost:5434/ireport_test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true # the tests load the real text model (backend/models/txt-1.0.npz)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - name: Install
+        run: pip install -r backend/requirements-dev.txt scikit-learn
+      - name: Backend tests
+        working-directory: backend
+        run: pytest -q
+      - name: ML parity tests
+        run: python -m pytest -q ml/tests
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Translations complete
+        run: node scripts/check-i18n.mjs
+      - name: Production build
+        run: pnpm build
+      - name: Dependency audit
+        run: pnpm audit --audit-level high
