@@ -115,14 +115,14 @@ async def test_admin_can_change_response_days_and_due_dates_follow(client):
     from app import priority, risk_config
     from tests.conftest import admin_headers
     h = await admin_headers(client)
-    r = await client.get("/api/v1/admin/response-times", headers=h)
+    r = await client.get("/admin/response-times", headers=h)
     assert [i["hours"] for i in r.json()["items"]] == [24, 72, 336, 720]
     try:
-        r = await client.put("/api/v1/admin/response-times", headers=h, json={"emergency": 1, "urgent": 2, "routine": 5, "planned": 10})
+        r = await client.put("/admin/response-times", headers=h, json={"emergency": 1, "urgent": 2, "routine": 5, "planned": 10})
         assert r.status_code == 200 and [i["hours"] for i in r.json()["items"]] == [24, 48, 120, 240]
         assert priority.response_of(8) == ("Urgent", 48)
-        bad = await client.put("/api/v1/admin/response-times", headers=h, json={"emergency": 5, "urgent": 2, "routine": 5, "planned": 10})
+        bad = await client.put("/admin/response-times", headers=h, json={"emergency": 5, "urgent": 2, "routine": 5, "planned": 10})
         assert bad.status_code == 422
     finally:
-        await client.put("/api/v1/admin/response-times", headers=h, json={"emergency": 1, "urgent": 3, "routine": 14, "planned": 30})
+        await client.put("/admin/response-times", headers=h, json={"emergency": 1, "urgent": 3, "routine": 14, "planned": 30})
         assert priority.response_of(8) == ("Urgent", 72) and risk_config.RESPONSES[0][2] == 24

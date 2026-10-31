@@ -91,7 +91,7 @@ export default function AuthorityDashboard({ user, lang = "en", onSwitch }: { us
   const clearFilters = () => { setCat(""); setArea(""); setSearch(""); setResponse(""); setView("all"); };
 
   return <main className="page section ad">
-    <div className="page-heading"><div><span className="eyebrow">{tr(lang, "ad_eyebrow")}</span><h1>{tr(lang, "ad_title")}</h1><p>{tr(lang, "ad_welcome")}, {user.name} · {deptLabel(lang, user.department)} · {user.employee_id}</p></div></div>
+    <div className="page-heading"><div><span className="eyebrow">{tr(lang, "ad_eyebrow")}</span><h1>{user.area ? tr(lang, "ad_titleArea").replace("{area}", user.area) : tr(lang, "ad_title")}</h1><p>{tr(lang, "ad_welcome")}, {user.name} · {deptLabel(lang, user.department)} · {user.employee_id}</p></div></div>
 
     {user.area && <WardCard area={user.area} />}
 

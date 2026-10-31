@@ -247,6 +247,7 @@ export const STR = {
   // authority + admin screens
   ad_eyebrow: T("AUTHORITY CONTROL ROOM", "प्राधिकरण नियंत्रण कक्ष", "प्राधिकरण नियंत्रण कक्ष"),
   ad_title: T("Every problem in Mumbai", "मुंबई की हर समस्या", "मुंबईतील प्रत्येक समस्या"),
+  ad_titleArea: T("Every problem in {area}", "{area} की हर समस्या", "{area} मधील प्रत्येक समस्या"),
   ad_welcome: T("Welcome", "स्वागत है", "स्वागत"),
   ad_total: T("Total problems", "कुल समस्याएँ", "एकूण समस्या"),
   ad_open: T("Open", "खुली", "खुल्या"),

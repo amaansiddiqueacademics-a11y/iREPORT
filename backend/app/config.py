@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
@@ -94,6 +94,34 @@ class Settings(BaseSettings):
         if isinstance(v, str) and not v.strip().startswith("["):
             return [o.strip() for o in v.split(",") if o.strip()]
         return v
+
+    @model_validator(mode="after")
+    def refuse_unsafe_production(self) -> "Settings":
+        """In production, refuse to start with the placeholder secrets from the code or from .env.example: a known JWT
+        secret lets anyone forge login tokens, and a known admin password hands over the admin account."""
+        if self.env != "production":
+            return self
+        problems = []
+        if self.jwt_secret in PLACEHOLDER_SECRETS or len(set(self.jwt_secret)) < 10:
+            problems.append("JWT_SECRET is a placeholder; set it to the output of `openssl rand -hex 32`")
+        if self.admin_password and (self.admin_password in PLACEHOLDER_SECRETS or len(self.admin_password) < 12):
+            problems.append("ADMIN_PASSWORD is a placeholder or shorter than 12 characters")
+        if self.storage_backend == "memory":
+            problems.append("STORAGE_BACKEND=memory loses every photo on restart; use s3")
+        if not self.cookie_secure:
+            problems.append("COOKIE_SECURE must be true in production (HTTPS only)")
+        if problems:
+            raise ValueError("Unsafe production settings: " + "; ".join(problems))
+        return self
+
+
+# Values shipped in this repository (defaults and .env.example). Never acceptable in production.
+PLACEHOLDER_SECRETS = {
+    "change-me-in-production-please-32b",
+    "replace-with-64-random-characters-from-openssl-rand-hex-32",
+    "change-this-admin-password",
+    "minioadmin",
+}
 
 
 @lru_cache

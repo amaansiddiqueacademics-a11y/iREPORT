@@ -29,6 +29,8 @@
 @keyframes statusFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .incident-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .incident-grid .incident-card>img{height:205px}
+/* A card without a photo: the placeholder takes the photo slot only, not the whole card (height:100% hid the title, status and buttons). */
+.incident-card>.no-photo{height:205px;min-height:0;border-radius:0}
 .incident-grid .incident-card h3{font-size:18px;min-height:48px}
 .incident-grid .incident-body{padding:17px}
 .evidence-divider{display:flex;align-items:center;gap:12px;margin:20px 0 12px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px}

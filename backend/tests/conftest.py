@@ -63,6 +63,10 @@ async def clean():
     async with engine.begin() as conn:
         await conn.execute(text(f"TRUNCATE {TABLES} RESTART IDENTITY CASCADE"))
         await conn.execute(text("ALTER SEQUENCE incident_public_seq RESTART"))
+        # TRUNCATE users CASCADE also empties response_settings (updated_by references users); put the defaults back.
+        await conn.execute(text("""INSERT INTO response_settings (name, hours)
+            VALUES ('Emergency', 24), ('Urgent', 72), ('Routine', 336), ('Planned', 720)
+            ON CONFLICT (name) DO UPDATE SET hours = EXCLUDED.hours, updated_by = NULL"""))
     ratelimit.reset()
     from app import storage
 
