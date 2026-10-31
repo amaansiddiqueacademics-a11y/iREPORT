@@ -134,8 +134,8 @@ export default function AdminPerformance({ lang = "en" }: { lang?: Lang }) {
     <section className="admin-card">
       <h2>Departments</h2><p className="muted-line">Open work and how often fixes were finished on time.</p>
       <div className="perf-table dept" role="table">
-        <div className="perf-tr head" role="row"><span>Department</span><span>Open</span><span>High risk</span><span>Overdue</span><span>Resolved</span><span>On time</span></div>
-        {d.departments.map(x => <div className="perf-tr" role="row" key={x.department}><b>{deptLabel(lang, x.department)}</b><span>{x.open}</span><span>{x.high_risk}</span><span className={x.overdue ? "red" : ""}>{x.overdue}</span><span>{x.resolved}</span><span>{x.on_time_pct === null ? "–" : `${x.on_time_pct}%`}</span></div>)}
+        <div className="perf-tr head" role="row"><span role="columnheader">Department</span><span role="columnheader">Open</span><span role="columnheader">High risk</span><span role="columnheader">Overdue</span><span role="columnheader">Resolved</span><span role="columnheader">On time</span></div>
+        {d.departments.map(x => <div className="perf-tr" role="row" key={x.department}><b role="cell">{deptLabel(lang, x.department)}</b><span role="cell">{x.open}</span><span role="cell">{x.high_risk}</span><span role="cell" className={x.overdue ? "red" : ""}>{x.overdue}</span><span role="cell">{x.resolved}</span><span role="cell">{x.on_time_pct === null ? "–" : `${x.on_time_pct}%`}</span></div>)}
       </div>
     </section>
 
@@ -150,10 +150,10 @@ export default function AdminPerformance({ lang = "en" }: { lang?: Lang }) {
 
     <section className="admin-card">
       <h2>Officers</h2><p className="muted-line">Who is working on what. Red numbers are overdue complaints.</p>
+      {d.officers.length === 0 && <p className="muted-line">No approved officers yet.</p>}
       <div className="perf-table off" role="table">
-        <div className="perf-tr head" role="row"><span>Officer</span><span>Open</span><span>Overdue</span><span>Resolved</span><span>Typical fix</span></div>
-        {d.officers.length === 0 && <p className="muted-line">No approved officers yet.</p>}
-        {d.officers.map(o => <div className="perf-tr" role="row" key={o.id}><span><b>{o.name}</b><small>{deptLabel(lang, o.department)} · {o.area ?? "whole city"}</small></span><span>{o.open}</span><span className={o.overdue ? "red" : ""}>{o.overdue}</span><span>{o.resolved}</span><span>{o.median_fix_hours != null ? `${o.median_fix_hours} h` : "–"}</span></div>)}
+        <div className="perf-tr head" role="row"><span role="columnheader">Officer</span><span role="columnheader">Open</span><span role="columnheader">Overdue</span><span role="columnheader">Resolved</span><span role="columnheader">Typical fix</span></div>
+        {d.officers.map(o => <div className="perf-tr" role="row" key={o.id}><span role="cell"><b>{o.name}</b><small>{deptLabel(lang, o.department)} · {o.area ?? "whole city"}</small></span><span role="cell">{o.open}</span><span role="cell" className={o.overdue ? "red" : ""}>{o.overdue}</span><span role="cell">{o.resolved}</span><span role="cell">{o.median_fix_hours != null ? `${o.median_fix_hours} h` : "–"}</span></div>)}
       </div>
     </section>
 

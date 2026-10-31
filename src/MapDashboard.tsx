@@ -76,7 +76,7 @@ export default function MapDashboard({ mode, lang = "en" }: { mode: "authority" 
 
     {q.isPending && <div className="md-cards">{[0, 1, 2].map(k => <div key={k} className="md-card skeleton-card"><div className="skeleton-line w75" /><div className="skeleton-line w50" /></div>)}</div>}
     {q.isSuccess && visible.length === 0 && <div className="empty-note"><Icon name="check" /><span><b>{tr(lang, "m_noneHere")}</b></span></div>}
-    <div className="md-cards">{visible.slice(0, more).map(i => <button key={i.id} className={`md-card lvl-${i.response.toLowerCase()}${selectedId === i.id ? " sel" : ""}${isOpen(i.status) ? "" : " done"}`} onClick={() => setSelectedId(i.id)} aria-label={`${tr(lang, "m_openDetails")}: ${i.title}`}>
+    <div className="md-cards">{visible.slice(0, more).map(i => <button key={i.id} className={`md-card lvl-${i.response.toLowerCase()}${selectedId === i.id ? " sel" : ""}${isOpen(i.status) ? "" : " done"}`} onClick={() => setSelectedId(i.id)} title={tr(lang, "m_openDetails")}>
       <span className="mc-top">
         <Evidence url={i.thumb_url} category={i.category} alt={i.title} className="cat-photo sm" />
         <span className="mc-title"><b>{i.title}</b><small><Icon name="pin" size={13} /> {i.area ?? OUTSIDE}<i>{i.public_id}</i></small></span>
