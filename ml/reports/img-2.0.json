@@ -84,5 +84,5 @@
       }
     }
   },
-  "caveat": "Small, third-party, non-Mumbai data. Water Leakage, Drainage and Electrical Hazard have no data and are not predicted."
+  "caveat": "Small, third-party, non-Mumbai data. Water Leakage has no photo data and is not predicted; streetlight photos are often labelled Electrical Hazard."
 }

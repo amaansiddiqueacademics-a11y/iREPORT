@@ -151,7 +151,7 @@ def main() -> None:
         "val_macro_f1": round(f1_val, 4), "test_macro_f1_sklearn": round(test_f1, 4),
         "test_accuracy_fp32": round(acc32, 4), "test_accuracy_int8": round(acc8, 4), "shipped": chosen.name, "latency": latency(chosen, SIZE),
         "data_manifest": json.loads((args.data / "manifest.json").read_text()),
-        "caveat": "Small, third-party, non-Mumbai data. Water Leakage, Drainage and Electrical Hazard have no data and are not predicted.",
+        "caveat": "Small, third-party, non-Mumbai data. Water Leakage has no photo data and is not predicted; streetlight photos are often labelled Electrical Hazard.",
     }
     (ROOT / "ml/reports").mkdir(exist_ok=True)
     (ROOT / "ml/reports" / f"{args.version}.json").write_text(json.dumps(report, indent=2))

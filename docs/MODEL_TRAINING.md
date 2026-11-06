@@ -41,7 +41,9 @@ How to read this:
 - The text model only ever suggests. Below 0.60 confidence the app asks the citizen to choose.
 - Real complaints will be noisier than these hand-written sentences, so expect lower numbers until it is retrained on real, citizen-confirmed reports.
 
-### Image model: `img-1.0` shipped (linear probe), full fine-tune available
+### Image model: `img-2.0` shipped (linear probe), full fine-tune available
+
+The API loads `img-2.0` (8 labels, `ml/reports/img-2.0.json`); the steps below produced the earlier `img-1.0` and are the same for both, with `--version img-2.0`.
 
 `img-1.0` is a **linear probe**: a frozen ImageNet EfficientNet-Lite0 (int8 ONNX, 3.83 MB) with a logistic-regression head, trained in about 3 minutes on CPU on 1,800 images from public datasets. It predicts 6 classes: Pothole, Road Damage, Streetlight, Garbage, Other, not_civic. Held-out test (360 images): accuracy 0.928, macro-F1 0.927; recall Garbage 0.90, Other 0.92, Pothole 0.88, Road Damage 0.97, Streetlight 0.97, not_civic 0.93. Limits: the test images come from the same public sources as the training images (de-duplicated, but not independent), so real-world accuracy will be lower; `not_civic` was trained on flowers and Caltech101 objects only; there are no Mumbai photos; Water Leakage, Drainage and Electrical Hazard have no data and are never predicted (the image result is ignored when the citizen has chosen one of those). Numbers: `ml/reports/img-1.0.json`.
 

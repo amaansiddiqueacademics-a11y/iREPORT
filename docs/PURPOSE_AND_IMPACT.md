@@ -71,8 +71,8 @@ These are the changes the design aims for, and the figures the app itself comput
 - Map checks from OpenStreetMap (schools, hospitals, main roads) are built but not loaded; until then, those facts come from what the citizen ticked and are labelled "citizen says".
 - Some officer actions were verified by automated tests but not clicked through by a person in a browser.
 - Hindi and Marathi wording needs review by native speakers.
-- The image model recognises six classes only and is a demonstration-level model; it needs real Mumbai photos before anyone relies on it.
-- Real ward boundaries are not loaded; areas are assigned from the nearest of the seeded area centres.
+- The image model recognises 7 problem types (not Water Leakage), confuses streetlights with electrical hazards, and was trained on at most 20 non-Mumbai photos per class; it needs real Mumbai photos before anyone relies on it.
+- Official BMC ward boundaries are loaded for the 33 BMC areas; areas outside BMC limits still use the nearest area centre.
 - Performance was measured on an earlier build and should be re-measured on the real server.
 
 Details of each gap and its reason: [FEATURES.md](FEATURES.md#known-gaps) and [OPEN_ITEMS.md](OPEN_ITEMS.md).
