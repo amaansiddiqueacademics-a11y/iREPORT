@@ -43,11 +43,11 @@ The pictures in this folder that are not the project's own files come from Wikim
 | Vasai | vasai.png | en:User:Oknitop. Transferred to Commons by User:Carlos Luis  | CC BY-SA 3.0 | [Vasaifort.jpg](https://commons.wikimedia.org/wiki/File:Vasaifort.jpg) |
 
 
-### Area pictures without a credit
+### Area pictures by the project team
 
 `andheri-east.png`, `andheri-west.png`, `bandra.png`, `borivali.png`, `goregaon.png`, `malad.png`, `sion.png`, `ulhasnagar.png` and
-`vile-parle.png` were supplied by the project owner and have no recorded source or licence. Confirm each one, or replace it with a
-Wikimedia Commons picture and add a row above, before public release.
+`vile-parle.png` are the project team's own pictures (recorded 6 Nov 2026), released with the project under the
+[MIT Licence](../LICENSE).
 
 ### Category pictures
 
@@ -56,7 +56,7 @@ Used on the home page cards and in the report flow's category picker (`public/ca
 | File | Source | Licence |
 |---|---|---|
 | water-leakage.webp | original illustration drawn for this project (31 Oct 2026); it replaced a stock image that carried a Shutterstock watermark | project's own |
-| pothole.jpg, garbage.jpg, streetlight.jpg, electrical.jpg, other.avif | supplied by the project owner | source and licence not recorded; confirm or replace before public release |
+| pothole.jpg, garbage.jpg, streetlight.jpg, electrical.jpg, other.avif | the project team's own pictures (recorded 6 Nov 2026) | project's own, MIT |
 
 ### Hazard-level symbols
 
