@@ -1,6 +1,6 @@
 -r requirements.txt
-pytest>=8.3
-pytest-asyncio>=0.24
-httpx>=0.28
+pytest>=9.2.0
+pytest-asyncio>=1.4.1.post1
+httpx>=0.28.1
 # Only used by tests to build a tiny ONNX fixture model.
-onnx>=1.17
+onnx>=1.23.2
