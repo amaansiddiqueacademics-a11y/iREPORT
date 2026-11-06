@@ -3,7 +3,7 @@ import puppeteer from "puppeteer-core";
 import fs from "node:fs";
 import path from "node:path";
 
-export const SITE = "http://localhost:8443/";
+export const SITE = "http://localhost:5173/";
 export const VIEW = { width: 1600, height: 900, deviceScaleFactor: 2 };
 export const OUT = "public/screens";
 export const SPOT = { latitude: 19.141, longitude: 72.829, accuracy: 8 }; // Andheri West, no reports within 300 m

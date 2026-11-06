@@ -29,14 +29,13 @@ In another terminal:
 
 ```powershell
 npx pnpm@10 install
-$env:PORT=5173; npx pnpm@10 dev
+npx pnpm@10 dev
 ```
 
 Open **http://localhost:5173**.
 
-Why `PORT=5173`: `vite.config.ts` defaults to port 8443. Some programs (for example the
-AdBlock360 service) already use 8443 on Windows and answer with a JSON 404 instead of the app.
-5173 is already allowed in `CORS_ORIGINS` in `.env`.
+The site runs on port 5173 by default, which is already allowed in `CORS_ORIGINS` in `.env`. (Older versions
+defaulted to 8443, which some Windows programs such as the AdBlock360 service already use.)
 
 ### 3. Admin login
 

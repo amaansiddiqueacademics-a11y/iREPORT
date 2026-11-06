@@ -1,5 +1,5 @@
 // Citizen journey on the real site: home -> report flow (5 steps) -> success -> My Reports.
-// Run from ireport-video:  node capture/citizen.mjs   (needs the API on :8000 and the site on :8443)
+// Run from ireport-video:  node capture/citizen.mjs   (needs the API on :8000 and the site on :5173)
 import { Recorder, clickRect, login, open, settle, sleep, target } from "./lib.mjs";
 
 const DESCRIPTION = "Deep pothole near the bus stop, full of rain water for 4 days. Bikes swerve into traffic to avoid it.";

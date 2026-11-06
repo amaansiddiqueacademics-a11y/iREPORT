@@ -24,5 +24,5 @@ Remotion project for the iREPORT LinkedIn video. Separate from the app in the re
 - Shots, captions, cursor moves and clicks: `src/full/shots.ts`. Sections: `src/full/timeline.json`.
 - Music: `python scripts/make_full_audio.py` (run with `PYTHONPATH=scripts`).
 - Screens are real captures of the running site: `node capture/citizen.mjs`, `node capture/officer.mjs <ID>`,
-  `node capture/confirm.mjs`, `node capture/extras.mjs` (needs the API on :8000 and the site on :8443).
+  `node capture/confirm.mjs`, `node capture/extras.mjs` (needs the API on :8000 and the site on :5173).
   `citizen.mjs` files a real report, so re-running it creates a new one.

@@ -1,5 +1,7 @@
 # iREPORT: civic problem reporting for Mumbai
 
+[![CI](https://github.com/amaansiddiqueacademics-a11y/iREPORT/actions/workflows/ci.yml/badge.svg)](https://github.com/amaansiddiqueacademics-a11y/iREPORT/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 iREPORT lets residents report broken roads, garbage, dead streetlights, water leaks and electrical hazards in a few taps. It gives ward offices a control room that shows **what the problem is, where it is, how serious it is, and who acts next**.
 
 - **Citizens** report with a photo and a map pin, follow every step, then confirm the fix or reopen the complaint.
@@ -89,19 +91,13 @@ In a third terminal, from the repository root:
 npx pnpm@10 install
 ```
 
-then start the dev server on port 5173:
+then start the dev server:
 
 ```bash
-# macOS / Linux / Git Bash
-PORT=5173 npx pnpm@10 dev
-
-# Windows PowerShell
-$env:PORT=5173; npx pnpm@10 dev
+npx pnpm@10 dev
 ```
 
-Open **http://localhost:5173**.
-
-> Port 5173 is already allowed in `CORS_ORIGINS`. The Vite default is 8443, which some Windows programs already use and which then answers with a JSON 404 instead of the app.
+Open **http://localhost:5173**. That port is already allowed in `CORS_ORIGINS`; to use another one, set `PORT` and add the new address to `CORS_ORIGINS`.
 
 ### 5. Log in
 
@@ -184,6 +180,7 @@ Full details: [docs/FEATURES.md](docs/FEATURES.md).
 docker compose --profile test run --rm tests     # 156 backend tests
 python -m pytest ml/tests                        # 2 ML parity tests (needs numpy and scikit-learn)
 npx tsc --noEmit                                 # frontend type check
+node scripts/check-i18n.mjs                      # every string has Hindi and Marathi
 npx pnpm@10 build                                # production build
 ```
 
@@ -237,6 +234,9 @@ iREPORT/
 | [docs/OPEN_ITEMS.md](docs/OPEN_ITEMS.md) | What is not finished and why |
 | [docs/LANGUAGE_REVIEW.md](docs/LANGUAGE_REVIEW.md) | Status of the Hindi and Marathi translations |
 | [docs/IMAGE_CREDITS.md](docs/IMAGE_CREDITS.md) | Photo credits and licences |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to set up, test and send changes |
+| [SECURITY.md](SECURITY.md) | How to report a security problem privately |
+| [CITATION.cff](CITATION.cff) | How to cite the project |
 
 ---
 
@@ -257,7 +257,7 @@ iREPORT was built by:
 
 - **Abdul Hakim Shaikh** ([@HakimK438](https://github.com/HakimK438))
 - **Mohammed Amaan Siddique** ([@amaansiddiqueacademics-a11y](https://github.com/amaansiddiqueacademics-a11y))
-- **Sairaj** ([@srkhandagale1601-del](https://github.com/srkhandagale1601-del))
+- **Sairaj Khandagale** ([@srkhandagale1601-del](https://github.com/srkhandagale1601-del))
 
 The project started in [HakimK438/iREPORT](https://github.com/HakimK438/iREPORT); this repository continues it.
 

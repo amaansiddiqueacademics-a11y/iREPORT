@@ -87,7 +87,7 @@ The decision shown to officers is one of four categories, computed from a risk v
 - Every reason shows where it came from: **checked on map**, **citizen says**, **complaint records**, **calendar** or **category**.
 - A due date is stored for each complaint (24 hours, 3 days, 14 days or 30 days from the report time, by risk). It only ever moves earlier on re-scoring, so a promise already made is never extended. Overdue means open and past the due date.
 - A numeric `priority_score` (risk scaled to 0 to 100) is kept **only as a sort key**.
-- All numbers live in one file, [backend/app/risk_config.py](backend/app/risk_config.py). The same formula exists in Python and in SQL, and a test compares them on 1,024 input combinations.
+- All numbers live in one file, [backend/app/risk_config.py](../backend/app/risk_config.py). The same formula exists in Python and in SQL, and a test compares them on 1,024 input combinations.
 
 Design notes and the reasons behind each choice are in [DECISIONS.md](DECISIONS.md) (entries 57 onward).
 
@@ -179,7 +179,7 @@ Frontend:
 
 ```bash
 npx pnpm@10 install
-$env:PORT=5173; npx pnpm@10 dev    # PowerShell; reads VITE_API_URL (default http://localhost:8000/api/v1)
+npx pnpm@10 dev                    # http://localhost:5173; reads VITE_API_URL (default http://localhost:8000/api/v1)
 ```
 
 Open http://localhost:5173. Add the frontend's origin to `CORS_ORIGINS`. If the frontend and API are on different sites in production, set `COOKIE_SAMESITE=none` and `COOKIE_SECURE=true`.
