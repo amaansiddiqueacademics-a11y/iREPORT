@@ -21,6 +21,16 @@ DISAGREE_AT = 0.60  # both models at least this sure of different categories
 MISMATCH_AT = 0.60  # a single photo is flagged only when the image model is at least this sure it shows something else
 DOUBT_AT = 0.40     # a weaker mismatch than MISMATCH_AT: the report is kept but flagged "needs review"
 MERGED = {"Road Damage": "Pothole", "Drainage": "Water Leakage"}  # legacy names count as their merged category
+# Categories the image model cannot tell apart reliably: a streetlight photo shows the same pole, lamp and wiring as an
+# electrical hazard (img-2.0 labels most streetlight photos "Electrical Hazard"). One never rejects a photo of the other;
+# the model's own label is still shown to the officer.
+CONFUSABLE = [{"Streetlight", "Electrical Hazard"}]
+
+
+def related(a: str, b: str) -> bool:
+    """True when a photo of category `a` must not be treated as a mismatch for a report of category `b`."""
+    a, b = MERGED.get(a, a), MERGED.get(b, b)
+    return a == b or any(a in group and b in group for group in CONFUSABLE)
 
 
 @dataclass
@@ -99,9 +109,8 @@ def photo_check(index: int, probs: dict[str, float], chosen: str | None) -> dict
     "Other" is a catch-all, so it never mismatches. `looks_like` is the model's own top label (or "not_civic")."""
     top = max(probs, key=lambda k: probs[k])
     conf = probs[top]
-    norm = lambda c: MERGED.get(c, c)  # noqa: E731
-    mismatch = bool(chosen and chosen != "Other" and conf >= MISMATCH_AT and top != "Other" and norm(top) != norm(chosen))
-    return {"index": index, "looks_like": norm(top), "confidence": round(conf, 4), "matches": not mismatch}
+    mismatch = bool(chosen and chosen != "Other" and conf >= MISMATCH_AT and top != "Other" and not related(top, chosen))
+    return {"index": index, "looks_like": MERGED.get(top, top), "confidence": round(conf, 4), "matches": not mismatch}
 
 
 def photo_conflict(label: str | None, conf: float | None, chosen: str) -> str | None:
@@ -112,7 +121,7 @@ def photo_conflict(label: str | None, conf: float | None, chosen: str) -> str | 
         return None
     if label == NOT_CIVIC:
         return "wrong" if conf >= MISMATCH_AT else "doubtful" if conf >= DOUBT_AT else None
-    if chosen == "Other" or label == "Other" or MERGED.get(label, label) == MERGED.get(chosen, chosen):
+    if chosen == "Other" or label == "Other" or related(label, chosen):
         return None
     return "wrong" if conf >= MISMATCH_AT else "doubtful" if conf >= DOUBT_AT else None
 

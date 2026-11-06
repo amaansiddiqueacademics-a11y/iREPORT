@@ -164,3 +164,19 @@ async def test_text_model_is_small_and_fast(client):
     for _ in range(100):
         m.predict("garbage not collected near the market for a week")
     assert (time.perf_counter() - start) / 100 < 0.005  # under 5 ms per request
+
+
+def test_streetlight_and_electrical_photos_never_reject_each_other():
+    """img-2.0 labels most streetlight photos "Electrical Hazard" (same pole, lamp and wiring), so a citizen's real
+    streetlight photo must not be dropped as a mismatch, at analysis time or at submit time. Unrelated categories still are."""
+    sure_electrical = {"Electrical Hazard": 0.87, "Streetlight": 0.08, "Pothole": 0.05}
+    assert pipeline.photo_check(0, sure_electrical, "Streetlight")["matches"] is True
+    assert pipeline.photo_check(0, {"Streetlight": 0.9, "Garbage": 0.1}, "Electrical Hazard")["matches"] is True
+    assert pipeline.photo_conflict("Electrical Hazard", 0.87, "Streetlight") is None
+    assert pipeline.photo_conflict("Streetlight", 0.9, "Electrical Hazard") is None
+    # unrelated pairs and legacy merges behave as before
+    assert pipeline.photo_check(0, {"Garbage": 0.9, "Pothole": 0.1}, "Streetlight")["matches"] is False
+    assert pipeline.photo_conflict("Garbage", 0.9, "Streetlight") == "wrong"
+    assert pipeline.photo_conflict("Road Damage", 0.9, "Pothole") is None
+    assert pipeline.photo_conflict("Drainage", 0.9, "Water Leakage") is None
+    assert pipeline.photo_conflict("not_civic", 0.9, "Streetlight") == "wrong"
