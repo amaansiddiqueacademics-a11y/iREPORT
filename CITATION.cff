@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use or refer to this software, please cite it as below."
+title: "iREPORT: civic problem reporting for Mumbai"
+abstract: >-
+  A web application for reporting civic problems in Mumbai. Citizens report potholes, garbage, broken streetlights,
+  water leaks and electrical hazards with photos and a map pin; ward officers work from a control room that ranks
+  complaints by risk (impact x likelihood) and tracks every action until the citizen confirms the fix.
+type: software
+authors:
+  - given-names: Abdul Hakim
+    family-names: Shaikh
+  - given-names: Mohammed Amaan
+    family-names: Siddique
+  - given-names: Sairaj
+    family-names: Khandagale
+repository-code: "https://github.com/amaansiddiqueacademics-a11y/iREPORT"
+license: MIT
+keywords:
+  - civic technology
+  - Mumbai
+  - geographic information systems
+  - risk assessment
+  - FastAPI
+  - React
+  - PostGIS

@@ -9,6 +9,7 @@ build/
 .venv/
 __pycache__/
 .pytest_cache/
+.ruff_cache/
 backend/tests/.models/
 ml/runs/
 ml/data/images/
@@ -46,9 +47,11 @@ PROJECT_GUIDE.md
 .env.*
 !.env.example
 _backup*/
-# Only README.md is published; other notes stay local
+# Only README.md, CONTRIBUTING.md and SECURITY.md are published; other notes stay local
 /*.md
 !/README.md
+!/CONTRIBUTING.md
+!/SECURITY.md
 public/**/CREDITS.md
 # Unused source art (the app serves public/)
 /Location_images/

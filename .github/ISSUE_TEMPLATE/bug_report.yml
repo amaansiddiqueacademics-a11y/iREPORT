@@ -1,0 +1,32 @@
+name: Bug report
+description: Something in iREPORT does not work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: For a security problem, do not use this form. See SECURITY.md.
+  - type: dropdown
+    id: role
+    attributes:
+      label: Who were you signed in as?
+      options: [Not signed in, Citizen, Ward officer, Admin]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open Community\n2. Pick Bandra\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected and what happened instead
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Chrome 130 on Android

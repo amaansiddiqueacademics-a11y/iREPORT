@@ -1,0 +1,30 @@
+# Dependabot opens a pull request when a dependency has a new release or a security fix.
+# Updates are grouped per ecosystem and run weekly, so there are few pull requests to review; security fixes still
+# arrive as soon as an advisory is published. Every pull request runs the CI workflow before it can be merged.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /backend
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ["*"]
+
+  - package-ecosystem: npm # pnpm is detected from pnpm-lock.yaml
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      frontend:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: docker
+    directory: /backend
+    schedule:
+      interval: monthly

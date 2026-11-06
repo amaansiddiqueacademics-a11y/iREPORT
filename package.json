@@ -1,12 +1,20 @@
 {
   "name": "ireport",
+  "description": "iREPORT: civic problem reporting for Mumbai (website)",
   "private": true,
   "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amaansiddiqueacademics-a11y/iREPORT.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "check:i18n": "node scripts/check-i18n.mjs",
     "format": "oxfmt"
   },
   "dependencies": {

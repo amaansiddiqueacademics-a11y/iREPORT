@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement for citizens, officers or admins.
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: who
+    attributes:
+      label: Who is it for?
+      options: [Citizens, Ward officers, Admins, Developers]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
