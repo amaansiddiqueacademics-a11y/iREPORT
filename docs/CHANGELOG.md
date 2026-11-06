@@ -31,6 +31,6 @@
 - **Abuse checks on reports.** The same photo (perceptual hash) cannot back two reports; a photo whose GPS is far from the pinned spot sends the report to review; 25 reports a day per citizen; each report an officer decides is fake is a strike (3 in 30 days: the citizen's reports go to review; 5: reporting is paused). Copy-pasting one hold or reject reason onto many complaints is refused.
 - **Admin audit** (`GET /admin/audit`, panel on the admin page): per officer, fixes with a site photo, confirmed by the citizen, reopened, closed by timeout, holds and rejections, plus the latest resolutions to check.
 - **Send to crew.** Free `mailto:` and `sms:` links in the complaint brief with a plain-text work order (no reporter names or phone numbers). No email or SMS service is used, so no API key is needed.
-- **Tests:** 155 backend tests (22 new). Area pictures for 26 more areas come from Wikimedia Commons, credits in `public/areas/CREDITS.md`.
+- **Tests:** 155 backend tests (22 new). Area pictures for 26 more areas come from Wikimedia Commons, credits in `public/areas/CREDITS.md` (since moved to `docs/IMAGE_CREDITS.md`).
 
 ---
