@@ -80,7 +80,7 @@ export const QUESTIONS: Record<string, Question[]> = {
       o("off", "Not working", "काम नहीं कर रही", "बंद आहे", { problem: "Not working" }), o("flicker", "Flickering", "टिमटिमा रही", "लुकलुकते", { problem: "Flickering" }),
       o("pole", "Broken pole", "टूटा खंभा", "तुटलेला खांब", { problem: "Broken pole" }), o("wire", "Damaged wiring", "क्षतिग्रस्त तार", "खराब वायरिंग", { problem: "Damaged wiring", flags: ["Live wiring"] }),
     ]),
-    { id: "dark", text: L("How dark is the street?", "सड़क कितनी अंधेरी है?", "रस्ता किती अंधारा आहे?"), options: [
+    { id: "dark", text: L("How dark is the street?", "सड़क कितनी अंधेरी है?", "रस्त्यावर किती अंधार आहे?"), options: [
       o("full", "Fully dark", "पूरी तरह अंधेरा", "पूर्ण अंधार", { flags: ["Night-time hazard"] }), o("part", "Partly dark", "आंशिक अंधेरा", "अंशतः अंधार"),
     ] },
     { id: "safety", text: L("Is there a safety concern?", "क्या सुरक्षा की चिंता है?", "सुरक्षेची काळजी आहे का?"), options: [
