@@ -8,11 +8,8 @@ import { Brand, distanceLabel, homeCards } from "./brand";
 import { menuText, severityName, statusName, tr, trf, type StrKey } from "./i18n";
 import { FAQS, HOW_STEPS, HOW_TIPS, HOW_UI } from "./i18nStaff";
 import AuthPage from "./AuthPage";
-import AuthorityDashboard from "./AuthorityDashboard";
-import StaffGuide from "./StaffGuide";
 import SiteFooter from "./SiteFooter";
 import ProofCard from "./ProofCard";
-import AdminPanel from "./AdminPanel";
 
 /** If the control room crashes (for example the API is an older version than this frontend), show why instead of a blank page. */
 class StaffBoundary extends Component<{ lang: Lang; children: ReactNode }, { failed: boolean }> {
@@ -26,6 +23,11 @@ class StaffBoundary extends Component<{ lang: Lang; children: ReactNode }, { fai
 
 // The report flow (photo compression, AI step) is a separate chunk, loaded only when a report starts.
 const ReportFlow = lazy(() => import("./ReportFlow"));
+// Staff screens load on demand, so citizens (most visitors) never download the officer and admin code.
+const AuthorityDashboard = lazy(() => import("./AuthorityDashboard"));
+const AdminPanel = lazy(() => import("./AdminPanel"));
+const StaffGuide = lazy(() => import("./StaffGuide"));
+const staffLoading = <div className="page-loading" role="status">Loading…</div>;
 
 type Lang = "en" | "hi" | "mr";
 type Page = "home" | "community" | "reports" | "profile" | "auth" | "authority" | "admin" | "how";
@@ -406,9 +408,11 @@ export default function App() {
     {view === "reports" && <Reports lang={lang} user={user} open={openReport} go={go} />}
     {view === "profile" && <Profile lang={lang} setLang={setLang} go={go} goFaq={goFaq} user={user} logout={logout} />}
     {view === "auth" && <AuthPage onLogin={handleLogin} bmcImage={`${import.meta.env.BASE_URL}media/bmc-headquarters.jpg`} />}
+    <Suspense fallback={staffLoading}>
     {view === "authority" && user && <StaffBoundary lang={lang}><AuthorityDashboard key={user.id} user={user} lang={lang} onSwitch={handleLogin} /></StaffBoundary>}
     {view === "admin" && user && <AdminPanel lang={lang} />}
     {view === "how" && user && user.role !== "citizen" && <StaffGuide lang={lang} role={user.role === "admin" ? "admin" : "authority"} />}
+    </Suspense>
     <MobileNav page={view} go={go} open={openReport} lang={lang} user={user} logout={logout} />
     {flow !== "none" && user && <Suspense fallback={<div className="modal-backdrop"><div className="report-modal loading-modal" role="status">Loading…</div></div>}><ReportFlow key={flowKey} open={flow === "open"} initialCategory={flowCategory} lang={lang} close={() => setFlow("hidden")} discard={() => { setFlow("none"); }} done={(created, spot) => {
         setFlow("none"); qc.invalidateQueries({ queryKey: ["reports"] }); qc.invalidateQueries({ queryKey: ["contribution"] }); qc.invalidateQueries({ queryKey: ["community"] });

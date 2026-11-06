@@ -221,6 +221,7 @@ small.err{color:var(--red);font-size:12px}
 .ad-thumbs{display:flex;gap:6px;margin:8px 0}.ad-thumbs img{width:56px;height:56px;object-fit:cover;border-radius:8px}
 .ad-desc{font-size:13px;color:var(--muted);margin:6px 0}
 .loading-modal{display:grid;place-items:center;min-height:200px;color:var(--muted)}
+.page-loading{display:grid;place-items:center;min-height:50vh;color:var(--muted)}
 @media(max-width:640px){.user-chip>b,.user-chip>button em{display:none}.ad-row{grid-template-columns:auto 1fr;grid-template-areas:"c p" "m m" "s s"}.ad-row>input{grid-area:c}.ad-row>.prio{grid-area:p;width:52px;height:52px}.ad-row>.ad-main{grid-area:m}.ad-row>.pill{grid-area:s;justify-self:start}.timeline.t4{grid-template-columns:repeat(4,110px)}.mobile-nav.staff{grid-template-columns:repeat(3,1fr)}.ad-bulk{bottom:84px}.admin-row{grid-template-columns:auto 1fr}.admin-actions{grid-column:1/-1}.ad-toolbar select{flex:1 1 45%}}
 
 /* ---- user-testing fixes: report flow, source tags, hotspots, success animation ---- */
