@@ -26,7 +26,7 @@ jobs:
     env:
       DATABASE_URL: postgresql+asyncpg://ireport:ireport@localhost:5434/ireport_test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           lfs: true # the tests load the real text model (backend/models/txt-1.0.npz)
       - uses: actions/setup-python@v7
@@ -45,7 +45,7 @@ jobs:
   frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
         with:
           version: 10
