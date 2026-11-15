@@ -1,10 +1,10 @@
 # Runtime dependencies for the API image. CPU only, no PyTorch.
-fastapi>=0.162.0,<1
+fastapi>=0.162.2,<1
 uvicorn[standard]>=0.54.0
-pydantic>=2.14.2,<3
+pydantic>=2.14.3,<3
 pydantic-settings>=2.16.2
 email-validator>=2.3.0
-sqlalchemy[asyncio]>=2.1.6,<2.2
+sqlalchemy[asyncio]>=2.1.8,<2.2
 asyncpg>=0.32.0
 alembic>=1.20.1
 argon2-cffi>=25.1.0
