@@ -1,18 +1,18 @@
 # Runtime dependencies for the API image. CPU only, no PyTorch.
-fastapi>=0.162.2,<1
+fastapi>=0.163.1,<1
 uvicorn[standard]>=0.54.0
 pydantic>=2.14.3,<3
-pydantic-settings>=2.16.2
-email-validator>=2.3.0
-sqlalchemy[asyncio]>=2.1.8,<2.2
+pydantic-settings>=2.16.3
+email-validator>=2.4.0
+sqlalchemy[asyncio]>=2.1.9,<2.2
 asyncpg>=0.32.0
 alembic>=1.20.1
 argon2-cffi>=25.1.0
 pyjwt>=2.15.1
-python-multipart>=0.0.33
+python-multipart>=0.0.34
 pillow>=13.0.0
 pillow-heif>=1.8.1
-numpy>=2.5.4
-onnxruntime>=1.31.1
+numpy>=2.5.5
+onnxruntime>=1.32.0
 minio>=7.2.20
 apscheduler>=3.11.3,<4
